@@ -1,5 +1,5 @@
 # Версия docker-compose
-version: '3'
+version: "3"
 # Список наших сервисов (контейнеров)
 services:
   nginx:
@@ -22,6 +22,16 @@ services:
     # nginx должен общаться с php контейнером
     links:
       - php
+
+  #Next.js Service
+  nextjs:
+    ports:
+      - 3000:3000
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/:/usr/app
 
   #PHP Service
   php:
