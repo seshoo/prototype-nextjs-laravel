@@ -2,22 +2,27 @@
 version: "3"
 # Список наших сервисов (контейнеров)
 services:
-  nginx:
-    # используем последний стабильный образ nginx
+  nginx-proxy:
     image: nginx:latest
-    # имя контейнера
-    container_name: prototype_nginx
-    #
+    container_name: proxy
     restart: unless-stopped
-    #
     tty: true
-    # маршрутизируем порты
     ports:
       - "8080:80"
       # - "443:443"
-    # монтируем директории, слева директории на основной машине, справа - куда они монтируются в контейнере
     volumes:
-      - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
+      - ./docker/nginx-proxy/conf.d/:/etc/nginx/conf.d/
+    # nginx должен общаться с php контейнером
+
+  nginx-backend:
+    image: nginx:latest
+    container_name: backend
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8090:80"
+    volumes:
+      - ./docker/nginx-backend/conf.d/:/etc/nginx/conf.d/
       - ./backend:/var/www
     # nginx должен общаться с php контейнером
     links:
@@ -25,6 +30,7 @@ services:
 
   #Next.js Service
   nextjs:
+    container_name: nextjs
     ports:
       - 3000:3000
     build:
@@ -39,7 +45,7 @@ services:
       context: .
       dockerfile: ./docker/php/Dockerfile
     image: php:7.4-fpm
-    container_name: prototype_php
+    container_name: php
     restart: unless-stopped
     tty: true
     environment:
@@ -55,7 +61,7 @@ services:
   #MySQL Service
   mysql:
     image: mysql:5.7.24
-    container_name: prototype_mysql
+    container_name: mysql
     command: "--default-authentication-plugin=mysql_native_password"
     restart: unless-stopped
     tty: true
