@@ -2,7 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+export default function About(props) {
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +13,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>About</h1>
+        <div>{props.data.title}</div>
       </main>
 
       <footer className={styles.footer}>
@@ -29,4 +30,13 @@ export default function Home() {
       </footer>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  //   const res = await fetch(`http://0.0.0.0:8080/api`);
+  const res = await fetch(`https://jsonplaceholder.typicode.com/todos/1`);
+  const data = await res.json();
+
+  // Pass data to the page via props
+  return { props: { data } };
 }
