@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import axios from "axios";
 import styles from "../styles/Home.module.css";
 
 export default function About(props) {
@@ -13,7 +14,7 @@ export default function About(props) {
 
       <main className={styles.main}>
         <h1 className={styles.title}>About</h1>
-        <div>{props.data.title}</div>
+        <div>{JSON.stringify(props.data, null, 2)}</div>
       </main>
 
       <footer className={styles.footer}>
@@ -33,9 +34,7 @@ export default function About(props) {
 }
 
 export async function getServerSideProps() {
-  //   const res = await fetch(`http://0.0.0.0:8080/api`);
-  const res = await fetch(`https://jsonplaceholder.typicode.com/todos/1`);
-  const data = await res.json();
+  const { data } = await axios.get(`http://prototype_nginx/api`);
 
   // Pass data to the page via props
   return { props: { data } };
