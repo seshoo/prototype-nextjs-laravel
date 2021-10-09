@@ -34,7 +34,7 @@ export default function About(props) {
 }
 
 export async function getServerSideProps() {
-	const { data } = await axios.get(`http://backend/api`);
+	const { data } = await axios.get(`http://backend:4000/api`);
 
 	// Pass data to the page via props
 	return { props: { data } };
