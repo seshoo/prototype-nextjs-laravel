@@ -38,6 +38,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./frontend/:/usr/app
+      - /usr/app/node_modules
+      - /usr/app/.next
 
   #PHP Service
   php:
