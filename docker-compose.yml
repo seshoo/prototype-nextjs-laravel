@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "8080:80"
+      - "8081:80"
       # - "443:443"
     volumes:
       - ./docker/nginx-proxy/conf.d/:/etc/nginx/conf.d/
@@ -38,8 +38,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./frontend/:/usr/app
-      - /usr/app/node_modules
-      - /usr/app/.next
+      # - /usr/app/node_modules
+      # - /usr/app/.next
 
   #PHP Service
   php:
