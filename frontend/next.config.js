@@ -16,4 +16,7 @@ module.exports = {
         ignoreBuildErrors: true,
     },
     // swcMinify: true,
+    images: {
+        formats: [/* 'image/avif',  */ 'image/webp'],
+    },
 };
