@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Image from 'next/image';
 import Layout from '../components/layouts/default';
 
 export default function IndexPage() {
@@ -13,6 +14,17 @@ export default function IndexPage() {
             <Link href="/about">
                 <a>About page</a>
             </Link>
+            <div style={{ maxWidth: 1000 }}>
+                <Image
+                    src="/complex.png"
+                    priority={true}
+                    width={1478}
+                    height={687}
+                    layout="responsive"
+                    quality={80}
+                    alt=""
+                />
+            </div>
         </Layout>
     );
 }

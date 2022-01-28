@@ -12,7 +12,7 @@ export default function AboutPage(props) {
             </Head>
 
             <h1>About page</h1>
-            <div>{JSON.stringify(props.data, null, 2)}</div>
+            {props.data && <div>{JSON.stringify(props.data, null, 2)}</div>}
             <Link href="/">
                 <a>Home page</a>
             </Link>
