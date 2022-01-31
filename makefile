@@ -5,4 +5,4 @@ stop:
 down:
 	docker-compose down
 n_reload:
-	docker exec prototype_nginx nginx -s reload
+	docker exec nginx nginx -s reload
